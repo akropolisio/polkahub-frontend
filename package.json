@@ -1,7 +1,7 @@
 {
-  "name": "ethereum-dapp-starter-kit",
+  "name": "polkahub-frontend",
   "version": "0.0.1",
-  "description": "Frontend starter kit for Ethereum DApps",
+  "description": "Frontend for Polkahub",
   "main": "index.js",
   "scripts": {
     "dev": "better-npm-run dev",
