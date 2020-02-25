@@ -8,7 +8,7 @@ import { useStyles } from './ActivitiesCard.style';
 
 interface IOwnProps {
   metricsList: React.ReactNode[];
-  expansionPanelDetails?: string;
+  expansionPanelDetails?: string | null;
   asideContent: React.ReactNode;
 }
 
@@ -21,7 +21,7 @@ function ActivitiesCard(props: IOwnProps) {
 
   return (
     <Grid className={classes.root} container wrap="nowrap">
-      <Grid item xs={9} className={classes.mainInformation}>
+      <Grid item xs={10} className={classes.mainInformation}>
         <Grid container spacing={3} className={classes.metrics}>
           {metricsList.map((metric, index) => (
             <Grid key={index} item xs>
@@ -39,7 +39,7 @@ function ActivitiesCard(props: IOwnProps) {
           )}
         </Grid>
       </Grid>
-      <Grid item xs={3} className={classes.asideContent}>
+      <Grid item xs={2} className={classes.asideContent}>
         {asideContent}
       </Grid>
     </Grid>

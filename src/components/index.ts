@@ -30,3 +30,4 @@ export * from './Metric/Metric';
 export * from './ExpansionPanel/ExpansionPanel';
 export * from './ConfirmationDialog/ConfirmationDialog';
 export * from './Highlighted/Highlighted';
+export * from './NodeCard/NodeCard';

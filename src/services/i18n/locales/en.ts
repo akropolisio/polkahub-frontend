@@ -29,6 +29,18 @@ const en = {
     activitiesCard: {
       expansionPanelTitle: 'Description',
     },
+    nodeCard: {
+      name: 'Name',
+      version: 'Version',
+      updatedAt: 'Updated at',
+      createdAt: 'Created at',
+      owner: 'Owner',
+      buttons: {
+        copyWs: 'Copy WS',
+        copyHttp: 'Copy HTTP',
+        repo: 'Repo',
+      },
+    },
   },
 };
 

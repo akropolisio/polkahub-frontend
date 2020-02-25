@@ -5,3 +5,4 @@ export * from './withProps';
 export * from './useSubscribable';
 export * from './useCommunication';
 export * from './usePagination';
+export * from './useApiPagination';

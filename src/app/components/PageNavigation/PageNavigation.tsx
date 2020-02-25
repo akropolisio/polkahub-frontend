@@ -21,17 +21,24 @@ function PageNavigation() {
         >
           <Tab
             className={classes.tab}
-            label="All nodes"
+            label="All projects"
             component={Link}
-            value={routes.nodes.getElementKey()}
-            to={routes.nodes.getRedirectPath()}
+            value={routes.projects.getElementKey()}
+            to={routes.projects.getRedirectPath()}
           />
           <Tab
             className={classes.tab}
-            label="My nodes"
+            label="My projects"
             component={Link}
-            value={routes['my-nodes'].getElementKey()}
-            to={routes['my-nodes'].getRedirectPath()}
+            value={routes['my-projects'].getElementKey()}
+            to={routes['my-projects'].getRedirectPath()}
+          />
+          <Tab
+            className={classes.tab}
+            label="My applications"
+            component={Link}
+            value={routes['my-applications'].getElementKey()}
+            to={routes['my-applications'].getRedirectPath()}
           />
         </Tabs>
       )}
