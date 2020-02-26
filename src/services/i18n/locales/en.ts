@@ -4,7 +4,27 @@ const en = {
     mainTitle: 'Polkahub',
     pages: {},
   },
-  features: {},
+  features: {
+    auth: {
+      logout: 'Logout',
+      signIn: 'Sign In',
+      signUp: 'Sign Up',
+      fields: {
+        email: 'Enter email',
+        password: 'Enter password',
+        confirmPassword: 'Confirm password',
+      },
+      buttons: {
+        cancel: 'Cancel',
+        submit: 'Submit',
+        ok: 'Ok',
+      },
+      successfulRegistration: {
+        title: 'Successful registration',
+        message: 'Please check your inbox and confirm email',
+      },
+    },
+  },
   utils: {
     validation: {
       isRequired: 'Field is required',
@@ -18,6 +38,7 @@ const en = {
       decimalsMoreThen: 'Enter a valid number with decimals less than %{decimals} digits',
       mustBeAnInteger: 'Enter an integer',
       isPositiveNumber: 'Must be positive number',
+      isMatchPassword: 'Passwords do not match. Try again.',
     },
   },
   components: {

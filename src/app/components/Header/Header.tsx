@@ -3,7 +3,7 @@ import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 
 import { Back, InfoIcon } from 'components/icons';
 import { Grid, IconButton, Typography, Tooltip } from 'components';
-import { AuthButton } from 'features/auth';
+import { Auth } from 'features/auth';
 
 import { useStyles } from './Header.style';
 
@@ -44,7 +44,7 @@ function HeaderComponent(props: IProps) {
         </Grid>
 
         <Grid item>
-          <AuthButton color="secondary" />
+          <Auth />
         </Grid>
       </Grid>
     </div>

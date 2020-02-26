@@ -19,3 +19,8 @@ export interface Paginated<T> {
   records: T[];
   total: number;
 }
+
+export interface User {
+  email: string;
+  token: string;
+}

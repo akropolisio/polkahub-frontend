@@ -1,1 +1,1 @@
-export { AuthButton } from './AuthButton/AuthButton';
+export { Auth } from './Auth/Auth';

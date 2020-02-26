@@ -18,13 +18,15 @@ type ButtonProps = Pick<
 interface IProps extends ButtonProps {
   dialogMaxWidth?: DialogProps['maxWidth'];
   content: React.ReactNode;
-  children: (props: IChildrenProps) => React.ReactNode;
+  children: (props: IChildrenProps) => JSX.Element | null;
 }
 
 function ModalButton(props: IProps) {
   const classes = useStyles();
   const { children, content, dialogMaxWidth, ...rest } = props;
   const [isOpened, setIsOpened] = React.useState(false);
+
+  const Children = children;
 
   const openModal = React.useCallback(() => setIsOpened(true), []);
   const closeModal = React.useCallback(() => setIsOpened(false), []);
@@ -36,7 +38,7 @@ function ModalButton(props: IProps) {
       </Button>
       <Dialog fullWidth maxWidth={dialogMaxWidth || 'sm'} open={isOpened} onClose={closeModal}>
         <DialogContent className={classes.dialogContent}>
-          {typeof children === 'function' ? children({ closeModal }) : children}
+          {typeof Children === 'function' ? <Children closeModal={closeModal} /> : Children}
         </DialogContent>
       </Dialog>
     </>
