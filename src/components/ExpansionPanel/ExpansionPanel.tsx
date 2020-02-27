@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -46,7 +47,9 @@ function ExpansionPanelComponent(props: IProps) {
           </Typography>
         </Grid>
       </ExpansionPanelSummary>
-      <ExpansionPanelDetails className={detailsClassName}>{details}</ExpansionPanelDetails>
+      <ExpansionPanelDetails className={cn(classes.details, detailsClassName)}>
+        {details}
+      </ExpansionPanelDetails>
     </ExpansionPanel>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Button, { ButtonProps } from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
+import FileCopy from '@material-ui/icons/FileCopyOutlined';
 
 import { useTheme } from 'utils/styles';
 
@@ -38,7 +39,7 @@ export function CopyButton({ content, ...buttonProps }: Props) {
       placement="bottom"
     >
       <CopyToClipboard text={content} onCopy={handleCopy}>
-        <Button {...buttonProps} />
+        <Button {...buttonProps} endIcon={<FileCopy />} />
       </CopyToClipboard>
     </Tooltip>
   );

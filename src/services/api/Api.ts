@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable class-methods-use-this */
 import { autobind } from 'core-decorators';
-import { Observable, BehaviorSubject, timer } from 'rxjs';
+import { Observable, BehaviorSubject, timer, ReplaySubject, merge } from 'rxjs';
 import { switchMap, retryWhen, delay } from 'rxjs/operators';
 import R from 'ramda';
 import defaultAxios, { AxiosResponse } from 'axios';
@@ -20,6 +20,7 @@ const axios = defaultAxios.create({
 
 export class Api {
   private storage = new Storage<ApiStorageStates>('api', localStorageAdapter, { user: null }, []);
+  private reloadTrigger = new ReplaySubject<true>();
 
   public user = new BehaviorSubject<User | null>(this.storage.getItem('user'));
 
@@ -28,6 +29,10 @@ export class Api {
       this.storage.setItem('user', user);
       axios.defaults.headers.common.Authorization = user ? `Bearer ${user.token}` : undefined;
     });
+  }
+
+  public reloadData() {
+    this.reloadTrigger.next(true);
   }
 
   // AUTH
@@ -53,6 +58,12 @@ export class Api {
   }
 
   // PROJECTS
+
+  @autobind
+  public async updateProject(data: { id: number; description: string }): Promise<void> {
+    const response = await axios.put<Response<void>>('user_projects', data);
+    checkResponse(response);
+  }
 
   @memoize((...args: any[]) => R.toString(args))
   @autobind
@@ -122,7 +133,7 @@ export class Api {
 
   @autobind
   private longPool<T>(load: () => Promise<T>): Observable<T> {
-    return timer(0, LONG_POOLING_DELAY).pipe(
+    return merge(timer(0, LONG_POOLING_DELAY), this.reloadTrigger).pipe(
       switchMap(() => load()),
       retryWhen(errors => errors.pipe(delay(LONG_POOLING_DELAY))),
     );

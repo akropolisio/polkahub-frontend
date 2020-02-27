@@ -1,4 +1,5 @@
 export interface Node {
+  id?: number;
   createdAt: number;
   description: string | null;
   httpUrl: string;

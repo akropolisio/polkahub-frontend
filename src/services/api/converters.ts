@@ -4,6 +4,7 @@ import { BackendNode } from './types';
 
 export function convertNode(node: BackendNode): Node {
   return {
+    id: node.id,
     createdAt: node.created_at,
     description: node.description,
     httpUrl: node.http_url,

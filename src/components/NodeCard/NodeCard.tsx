@@ -22,6 +22,7 @@ interface IProps {
   repoUrl?: string;
   version: string;
   wsUrl: string;
+  actions?: JSX.Element | JSX.Element[];
 }
 
 const NodeCard = memo(function NodeCard(props: IProps) {
@@ -35,6 +36,7 @@ const NodeCard = memo(function NodeCard(props: IProps) {
     version,
     wsUrl,
     repoUrl,
+    actions = [],
   } = props;
 
   const classes = useStyles();
@@ -70,19 +72,19 @@ const NodeCard = memo(function NodeCard(props: IProps) {
 
   const asideContent = React.useMemo(
     () => (
-      <Grid container spacing={2} justify="center" direction="column">
-        <Grid item>
-          <CopyButton content={wsUrl} {...commonButtonProps}>
+      <Grid container spacing={2} justify="center">
+        <Grid item xs={6}>
+          <CopyButton content={wsUrl} size="small" {...commonButtonProps}>
             {t(tKeys.buttons.copyWs.getKey())}
           </CopyButton>
         </Grid>
-        <Grid item>
-          <CopyButton content={httpUrl} {...commonButtonProps}>
+        <Grid item xs={6}>
+          <CopyButton content={httpUrl} size="small" {...commonButtonProps}>
             {t(tKeys.buttons.copyHttp.getKey())}
           </CopyButton>
         </Grid>
         {repoUrl && (
-          <Grid item>
+          <Grid item xs={12}>
             <Button
               component="a"
               href={repoUrl}
@@ -94,9 +96,14 @@ const NodeCard = memo(function NodeCard(props: IProps) {
             </Button>
           </Grid>
         )}
+        {(Array.isArray(actions) ? actions : [actions]).map((action, index) => (
+          <Grid item xs={12} key={index}>
+            {action}
+          </Grid>
+        ))}
       </Grid>
     ),
-    [t, wsUrl, httpUrl, repoUrl],
+    [t, wsUrl, httpUrl, repoUrl, actions],
   );
 
   return (

@@ -24,6 +24,17 @@ const en = {
         message: 'Please check your inbox and confirm email',
       },
     },
+    editProject: {
+      formTitle: 'Edit project %{name}',
+      fields: {
+        description: 'Enter description',
+      },
+      buttons: {
+        edit: 'Edit',
+        cancel: 'Cancel',
+        submit: 'Submit',
+      },
+    },
   },
   utils: {
     validation: {
@@ -57,8 +68,8 @@ const en = {
       createdAt: 'Created at',
       owner: 'Owner',
       buttons: {
-        copyWs: 'Copy WS',
-        copyHttp: 'Copy HTTP',
+        copyWs: 'WS',
+        copyHttp: 'HTTP',
         repo: 'Repo',
       },
     },

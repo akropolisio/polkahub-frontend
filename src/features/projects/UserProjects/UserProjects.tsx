@@ -1,8 +1,10 @@
 import * as React from 'react';
 
 import { useApi } from 'services/api';
+import { EditProjectButton } from 'features/editProject';
 import { useSubscribable, usePagination } from 'utils/react';
 import { Loading, Hint, NodeCard, Grid } from 'components';
+import { Node } from 'model';
 
 export function UserProjects() {
   const api = useApi();
@@ -13,9 +15,9 @@ export function UserProjects() {
     <Loading meta={meta} errorComponent={Hint}>
       {paginatedItems.length ? (
         <Grid container spacing={2}>
-          {paginatedItems.map(({ login, ...node }, index) => (
+          {paginatedItems.map((node, index) => (
             <Grid item xs={12} key={index}>
-              <NodeCard {...node} owner={login} />
+              <EditableNodeCard {...node} />
             </Grid>
           ))}
           <Grid item xs={12}>
@@ -28,3 +30,19 @@ export function UserProjects() {
     </Loading>
   );
 }
+
+const EditableNodeCard = React.memo(function EditableNodeCard({ login, ...node }: Node) {
+  return (
+    <NodeCard
+      {...node}
+      owner={login}
+      actions={
+        node.id ? (
+          <EditProjectButton description={node.description} id={node.id} name={node.name} />
+        ) : (
+          undefined
+        )
+      }
+    />
+  );
+});

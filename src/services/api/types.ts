@@ -1,6 +1,7 @@
 import { User } from 'model';
 
 export interface BackendNode {
+  id?: number;
   created_at: number;
   description: string | null;
   http_url: string;

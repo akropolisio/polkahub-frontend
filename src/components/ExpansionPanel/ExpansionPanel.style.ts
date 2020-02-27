@@ -25,4 +25,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
   summaryTitle: {
     color: colors.royalPurple,
   },
+
+  details: {
+    whiteSpace: 'pre',
+  },
 }));
