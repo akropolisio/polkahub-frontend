@@ -2,7 +2,7 @@ export interface Node {
   createdAt: number;
   description: string | null;
   httpUrl: string;
-  login: string;
+  login?: string;
   name: string;
   repoUrl?: string;
   updatedAt: number;

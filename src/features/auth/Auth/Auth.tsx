@@ -8,7 +8,11 @@ import { LogoutButton } from '../LogoutButton/LogoutButton';
 import { SignInButton } from '../SignInButton/SignInButton';
 import { SignUpButton } from '../SignUpButton/SignUpButton';
 
-export function Auth() {
+interface Props {
+  onLogout?(): void;
+}
+
+export function Auth({ onLogout }: Props) {
   const api = useApi();
   const [user] = useSubscribable(() => api.user, []);
 
@@ -18,7 +22,7 @@ export function Auth() {
         <Typography>{user.email}</Typography>
       </Grid>
       <Grid item>
-        <LogoutButton color="secondary" variant="outlined" />
+        <LogoutButton onSuccessful={onLogout} color="secondary" variant="outlined" />
       </Grid>
     </Grid>
   ) : (

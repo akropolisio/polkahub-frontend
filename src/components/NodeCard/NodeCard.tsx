@@ -18,7 +18,7 @@ interface IProps {
   createdAt: number;
   description: string | null;
   httpUrl: string;
-  owner: string;
+  owner?: string;
   repoUrl?: string;
   version: string;
   wsUrl: string;
@@ -41,23 +41,24 @@ const NodeCard = memo(function NodeCard(props: IProps) {
   const { t } = useTranslate();
 
   const metricsList = React.useMemo(
-    () => [
-      <Metric
-        title={t(tKeys.name.getKey())}
-        value={name}
-        icon={<LendIcon className={classes.lendIcon} />}
-      />,
-      <Metric title={t(tKeys.version.getKey())} value={version} />,
-      <Metric title={t(tKeys.owner.getKey())} value={owner} />,
-      <Metric
-        title={t(tKeys.createdAt.getKey())}
-        value={new Date(createdAt * 1000).toLocaleDateString()}
-      />,
-      <Metric
-        title={t(tKeys.updatedAt.getKey())}
-        value={new Date(updatedAt * 1000).toLocaleDateString()}
-      />,
-    ],
+    () =>
+      [
+        <Metric
+          title={t(tKeys.name.getKey())}
+          value={name}
+          icon={<LendIcon className={classes.lendIcon} />}
+        />,
+        <Metric title={t(tKeys.version.getKey())} value={version} />,
+        owner && <Metric title={t(tKeys.owner.getKey())} value={owner} />,
+        <Metric
+          title={t(tKeys.createdAt.getKey())}
+          value={new Date(createdAt * 1000).toLocaleDateString()}
+        />,
+        <Metric
+          title={t(tKeys.updatedAt.getKey())}
+          value={new Date(updatedAt * 1000).toLocaleDateString()}
+        />,
+      ].filter(Boolean),
     [t, name, version, owner, createdAt, updatedAt],
   );
 

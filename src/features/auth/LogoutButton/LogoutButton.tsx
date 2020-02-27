@@ -7,7 +7,14 @@ import { useTranslate, tKeys as tKeysAll } from 'services/i18n';
 
 const tKeys = tKeysAll.features.auth;
 
-export function LogoutButton(props: React.ComponentPropsWithoutRef<typeof Button>) {
+interface Props {
+  onSuccessful?(): void;
+}
+
+export function LogoutButton({
+  onSuccessful,
+  ...buttonProps
+}: Props & React.ComponentPropsWithoutRef<typeof Button>) {
   const api = useApi();
   const { t } = useTranslate();
   const logoutCommunication = useCommunication(() => api.logout(), []);
@@ -15,14 +22,15 @@ export function LogoutButton(props: React.ComponentPropsWithoutRef<typeof Button
   const handleOnClick = React.useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       logoutCommunication.execute();
-      props.onClick && props.onClick(event);
+      buttonProps.onClick && buttonProps.onClick(event);
+      onSuccessful && onSuccessful();
     },
     [logoutCommunication.execute],
   );
 
   return (
     <Button
-      {...props}
+      {...buttonProps}
       onClick={handleOnClick}
       endIcon={
         <Loading

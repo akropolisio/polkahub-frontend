@@ -13,7 +13,7 @@ export function AllProjects() {
   );
 
   return (
-    <Loading meta={meta}>
+    <Loading meta={meta} errorComponent={Hint}>
       {items.length ? (
         <Grid container spacing={2}>
           {items.map(({ login, ...node }, index) => (

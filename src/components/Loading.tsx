@@ -20,6 +20,7 @@ interface IProps<V extends ProgressType> {
   meta?: MaybeArray<IMeta>;
   communication?: MaybeArray<CommunicationState<any, any>>;
   component?: React.ComponentType;
+  errorComponent?: React.ComponentType;
   progressVariant?: V;
   progressProps?: {
     linear: LinearProgressProps;
@@ -52,6 +53,7 @@ export function Loading<T extends ProgressType>(props: IProps<T>) {
     progressVariant,
     progressProps,
     component,
+    errorComponent,
     ignoreError,
     meta = [],
     communication = [],
@@ -62,6 +64,7 @@ export function Loading<T extends ProgressType>(props: IProps<T>) {
   const { error } = metas.find(value => value.error) || { error: null };
 
   const Wrapper = component || React.Fragment;
+  const ErrorWrapper = errorComponent || React.Fragment;
 
   const needToShowError = !!error && !ignoreError;
 
@@ -80,9 +83,9 @@ export function Loading<T extends ProgressType>(props: IProps<T>) {
         </Wrapper>
       )}
       {loaded && needToShowError && (
-        <Wrapper>
+        <ErrorWrapper>
           <Typography color="error">{error}</Typography>
-        </Wrapper>
+        </ErrorWrapper>
       )}
       {loaded && !needToShowError && children}
     </>

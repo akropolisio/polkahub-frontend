@@ -100,6 +100,22 @@ export class Api {
 
     return response.data.payload.map(convertNode);
   }
+
+  @memoize()
+  @autobind
+  public getUserApplications(): Observable<Node[]> {
+    return this.user.pipe(
+      switchMap(user => (user ? this._getUserApplications() : Promise.resolve<Node[]>([]))),
+    );
+  }
+
+  @autobind
+  private async _getUserApplications(): Promise<Node[]> {
+    const response = await axios.get<Response<BackendNode[]>>('user_applications');
+    checkResponse(response);
+
+    return response.data.payload.map(convertNode);
+  }
 }
 
 function checkResponse<T>(

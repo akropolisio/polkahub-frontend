@@ -5,6 +5,7 @@ import { Back, InfoIcon } from 'components/icons';
 import { Grid, IconButton, Typography, Tooltip } from 'components';
 import { Auth } from 'features/auth';
 
+import { routes } from '../../routes';
 import { useStyles } from './Header.style';
 
 interface IOwnProps {
@@ -15,8 +16,12 @@ interface IOwnProps {
 type IProps = IOwnProps & RouteComponentProps;
 
 function HeaderComponent(props: IProps) {
-  const { title, backRoutePath } = props;
+  const { title, backRoutePath, history } = props;
   const classes = useStyles();
+
+  const handleLogout = React.useCallback(() => {
+    history.push(routes.projects.getRedirectPath());
+  }, [history]);
 
   return (
     <div className={classes.root}>
@@ -44,7 +49,7 @@ function HeaderComponent(props: IProps) {
         </Grid>
 
         <Grid item>
-          <Auth />
+          <Auth onLogout={handleLogout} />
         </Grid>
       </Grid>
     </div>
