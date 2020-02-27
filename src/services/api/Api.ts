@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 import { autobind } from 'core-decorators';
 import { Observable, BehaviorSubject, timer } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, retryWhen, delay } from 'rxjs/operators';
 import R from 'ramda';
 import defaultAxios, { AxiosResponse } from 'axios';
 
@@ -60,9 +60,7 @@ export class Api {
     body: { filter?: string },
     pagination: PaginationOptions,
   ): Observable<Paginated<Node>> {
-    return timer(0, LONG_POOLING_DELAY).pipe(
-      switchMap(() => this._getAllProjects(body, pagination)),
-    );
+    return this.longPool(() => this._getAllProjects(body, pagination));
   }
 
   @autobind
@@ -88,9 +86,7 @@ export class Api {
   @memoize()
   @autobind
   public getUserProjects(): Observable<Node[]> {
-    return this.user.pipe(
-      switchMap(user => (user ? this._getUserProjects() : Promise.resolve<Node[]>([]))),
-    );
+    return this.longPoolPrivate(this._getUserProjects, []);
   }
 
   @autobind
@@ -104,9 +100,7 @@ export class Api {
   @memoize()
   @autobind
   public getUserApplications(): Observable<Node[]> {
-    return this.user.pipe(
-      switchMap(user => (user ? this._getUserApplications() : Promise.resolve<Node[]>([]))),
-    );
+    return this.longPoolPrivate(this._getUserApplications, []);
   }
 
   @autobind
@@ -115,6 +109,23 @@ export class Api {
     checkResponse(response);
 
     return response.data.payload.map(convertNode);
+  }
+
+  // HELPERS
+
+  @autobind
+  private longPoolPrivate<T>(load: () => Promise<T>, defaultValue: T): Observable<T> {
+    return this.user.pipe(
+      switchMap(user => (user ? this.longPool(load) : Promise.resolve<T>(defaultValue))),
+    );
+  }
+
+  @autobind
+  private longPool<T>(load: () => Promise<T>): Observable<T> {
+    return timer(0, LONG_POOLING_DELAY).pipe(
+      switchMap(() => load()),
+      retryWhen(errors => errors.pipe(delay(LONG_POOLING_DELAY))),
+    );
   }
 }
 
