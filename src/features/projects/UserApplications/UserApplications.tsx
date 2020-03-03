@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import { useApi } from 'services/api';
 import { useSubscribable, usePagination } from 'utils/react';
-import { Loading, Hint, NodeCard, Grid } from 'components';
+import { Loading, Hint, NodeCard, Grid, Link } from 'components';
+import { POLKAHUB_CLI_REPO_URL } from 'env';
 
 export function UserApplications() {
   const api = useApi();
@@ -23,7 +24,10 @@ export function UserApplications() {
           </Grid>
         </Grid>
       ) : (
-        <Hint>Projects is not found</Hint>
+        <Hint>
+          Applications is not found. You can create application with&nbsp;
+          <Link href={POLKAHUB_CLI_REPO_URL}>polkahub-cli</Link>.
+        </Hint>
       )}
     </Loading>
   );
