@@ -28,7 +28,10 @@ export function UserProjects() {
       ) : (
         <Hint>
           Projects is not found. You can create project with&nbsp;
-          <Link href={POLKAHUB_CLI_REPO_URL}>polkahub-cli</Link>.
+          <Link href={POLKAHUB_CLI_REPO_URL} target="_blank" rel="noopener noreferrer">
+            polkahub-cli
+          </Link>
+          .
         </Hint>
       )}
     </Loading>

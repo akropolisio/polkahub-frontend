@@ -26,7 +26,10 @@ export function UserApplications() {
       ) : (
         <Hint>
           Applications is not found. You can create application with&nbsp;
-          <Link href={POLKAHUB_CLI_REPO_URL}>polkahub-cli</Link>.
+          <Link href={POLKAHUB_CLI_REPO_URL} target="_blank" rel="noopener noreferrer">
+            polkahub-cli
+          </Link>
+          .
         </Hint>
       )}
     </Loading>
