@@ -27,6 +27,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
 
   details: {
-    whiteSpace: 'pre',
+    whiteSpace: 'pre-wrap',
   },
 }));
