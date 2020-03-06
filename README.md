@@ -1,4 +1,4 @@
-# Polkahub Frontend (active development) [![Build Status](https://www.travis-ci.org/akropolisio/polkahub-frontend.svg?branch=master)](https://www.travis-ci.org/akropolisio/polkahub-frontend)
+# Polkahub Frontend (active development) [![Build Status](https://www.travis-ci.com/akropolisio/polkahub-frontend.svg?branch=master)](https://www.travis-ci.com/akropolisio/polkahub-frontend)
 
 Our frontend is a classic SPA application built using Typescript and React. We used Axios to connect it with the backend, endpoint long pool is configured with conversion to RxJS stream. Assembling is done via Webpack.
 
