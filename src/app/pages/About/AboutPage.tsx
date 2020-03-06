@@ -7,8 +7,18 @@ import { routes } from 'app/routes';
 import { makeStyles, Theme } from 'utils/styles';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    marginBottom: theme.spacing(3),
+  },
   exploreButton: {
     minWidth: theme.spacing(30),
+  },
+  mainTitle: {
+    fontSize: theme.typography.h4.fontSize,
+  },
+  subTitle: {
+    fontSize: theme.typography.h5.fontSize,
+    fontStyle: 'italic',
   },
 }));
 
@@ -16,10 +26,12 @@ export function AboutPage() {
   const classes = useStyles();
 
   return (
-    <>
-      <Typography paragraph>
-        Discover parachains by the leading projects in the Web3 ecosystem. All this data is
-        immediately available for querying using substrate RPC API.
+    <div className={classes.root}>
+      <Typography className={classes.mainTitle} align="center">
+        Discover parachains by the leading projects in the Web3 ecosystem.
+      </Typography>
+      <Typography className={classes.mainTitle} paragraph align="center">
+        All this data is immediately available for querying using substrate RPC API.
       </Typography>
       <Typography paragraph align="center">
         <Button
@@ -33,16 +45,19 @@ export function AboutPage() {
           Explore
         </Button>
       </Typography>
-      <Typography paragraph>
+      <Typography className={classes.subTitle} align="center">
         If you are developer, you can run or deploy any Substrate-based parachain with one command
-        line. Check our{' '}
+        line.
+      </Typography>
+      <Typography className={classes.subTitle} paragraph align="center">
+        Check our{' '}
         <Link component={RouterLink} to={`${routes.about.getRedirectPath()}#quick-start`}>
           Quick Start
         </Link>{' '}
         tutorial.
       </Typography>
       <Markdown>{content}</Markdown>
-    </>
+    </div>
   );
 }
 
@@ -149,4 +164,6 @@ done
 https  -> "https://frightened-brick-8071-alexander-rpc.polkahub.tech"
 ws     -> "wss://frightened-brick-8071-alexander.polkahub.tech"
 \`\`\`
+
+### Check [our wiki](https://github.com/akropolisio/polkahub-monorepo/wiki) for more information.
 `;
