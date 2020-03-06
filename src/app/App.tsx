@@ -28,7 +28,7 @@ export function App() {
           path={routes['my-applications'].getRoutePath()}
           component={MyApplicationsPage}
         />
-        <Redirect to={routes.projects.getRedirectPath()} />
+        <Redirect to={routes.about.getRedirectPath()} />
       </Switch>
     </BaseLayout>
   );
