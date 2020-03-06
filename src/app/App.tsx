@@ -5,6 +5,7 @@ import { useTranslate, tKeys as tKeysAll } from 'services/i18n';
 
 import { DemoPage } from './pages/Demo/DemoPage';
 import { AllProjectsPage, MyApplicationsPage, MyProjectsPage } from './pages/Projects/ProjectsPage';
+import { AboutPage } from './pages/About/AboutPage';
 import { routes } from './routes';
 import { BaseLayout } from './components/BaseLayout/BaseLayout';
 
@@ -19,6 +20,7 @@ export function App() {
         {process.env.NODE_ENV !== 'production' && (
           <Route exact path={routes.demo.getRoutePath()} component={DemoPage} />
         )}
+        <Route exact path={routes.about.getRoutePath()} component={AboutPage} />
         <Route exact path={routes.projects.getRoutePath()} component={AllProjectsPage} />
         <Route exact path={routes['my-projects'].getRoutePath()} component={MyProjectsPage} />
         <Route

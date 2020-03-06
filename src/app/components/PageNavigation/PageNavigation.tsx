@@ -25,6 +25,13 @@ function PageNavigation() {
         >
           <Tab
             className={classes.tab}
+            label="About"
+            component={Link}
+            value={routes.about.getElementKey()}
+            to={routes.about.getRedirectPath()}
+          />
+          <Tab
+            className={classes.tab}
             label="All projects"
             component={Link}
             value={routes.projects.getElementKey()}

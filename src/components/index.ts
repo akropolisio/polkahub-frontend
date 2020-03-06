@@ -32,3 +32,4 @@ export * from './ExpansionPanel/ExpansionPanel';
 export * from './ConfirmationDialog/ConfirmationDialog';
 export * from './Highlighted/Highlighted';
 export * from './NodeCard/NodeCard';
+export * from './Markdown/Markdown';
