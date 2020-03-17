@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef, useEffect } from 'react';
+import { useCallback, useState, useRef, useEffect, useMemo } from 'react';
 import { Object, B } from 'ts-toolbelt';
 
 import { makeCancelablePromise, CancelablePromise } from 'utils/makeCancelablePromise';
@@ -79,12 +79,15 @@ export function useCommunication<
     [inputs],
   );
 
-  return {
-    execute,
-    cancelRequest,
-    reset,
-    status,
-    error,
-    result: result as CommunicationState<E, O>['result'],
-  };
+  return useMemo(
+    () => ({
+      execute,
+      cancelRequest,
+      reset,
+      status,
+      error,
+      result: result as CommunicationState<E, O>['result'],
+    }),
+    [execute, cancelRequest, reset, status, error, result],
+  );
 }

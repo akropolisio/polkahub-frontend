@@ -53,6 +53,22 @@ export class Api {
   }
 
   @autobind
+  public async resetPassword(body: { email: string }): Promise<void> {
+    const response = await axios.post<Response<void>>('reset_password', body);
+    checkResponse(response);
+  }
+
+  @autobind
+  public async changePassword(body: {
+    email: string;
+    token: string;
+    password: string;
+  }): Promise<void> {
+    const response = await axios.put<Response<void>>('update_password', body);
+    checkResponse(response);
+  }
+
+  @autobind
   public async logout(): Promise<void> {
     this.user.next(null);
   }

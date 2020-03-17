@@ -9,7 +9,10 @@ const en = {
       logout: 'Logout',
       signIn: 'Sign In',
       signUp: 'Sign Up',
+      resetPassword: 'Reset password',
+      changePassword: 'Change password',
       fields: {
+        code: 'Enter code from inbox',
         email: 'Enter email',
         password: 'Enter password',
         confirmPassword: 'Confirm password',
@@ -18,10 +21,20 @@ const en = {
         cancel: 'Cancel',
         submit: 'Submit',
         ok: 'Ok',
+        resendCode: 'Resend code',
+        forgotPassword: 'Forgot password',
       },
       successfulRegistration: {
         title: 'Successful registration',
         message: 'Please check your inbox and confirm email',
+      },
+      successfulPasswordChanging: {
+        title: 'Password change Successful',
+        message: 'You can log in using the new password.',
+      },
+      errors: {
+        'account not found, please registered and auth first':
+          'A user with this email and password was not found. Please check the entered email and password, or go through the registration procedure.',
       },
     },
     editProject: {
