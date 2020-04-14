@@ -3,8 +3,10 @@ import { withRouter, RouteComponentProps, Link as RouterLink } from 'react-route
 
 import { Back, InfoIcon, GitHubIcon } from 'components/icons';
 import { Grid, IconButton, Typography, Tooltip, Link } from 'components';
+import { Auth } from 'features/auth';
 import { POLKAHUB_MONOREPO_URL } from 'env';
 
+import { routes } from '../../routes';
 import { useStyles } from './Header.style';
 
 interface IOwnProps {
@@ -15,8 +17,12 @@ interface IOwnProps {
 type IProps = IOwnProps & RouteComponentProps;
 
 function HeaderComponent(props: IProps) {
-  const { title, backRoutePath } = props;
+  const { title, backRoutePath, history } = props;
   const classes = useStyles();
+
+  const handleLogout = React.useCallback(() => {
+    history.push(routes.projects.getRedirectPath());
+  }, [history]);
 
   return (
     <div className={classes.root}>
@@ -39,6 +45,10 @@ function HeaderComponent(props: IProps) {
                 </span>
               </Tooltip>
             </Typography>
+          </Grid>
+
+          <Grid item>
+            <Auth onLogout={handleLogout} />
           </Grid>
         </Grid>
       </div>
