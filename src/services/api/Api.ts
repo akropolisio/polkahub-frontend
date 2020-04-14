@@ -22,9 +22,7 @@ export class Api {
   private storage = new Storage<ApiStorageStates>('api', localStorageAdapter, { user: null }, []);
   private reloadTrigger = new ReplaySubject<true>();
 
-  public user = new BehaviorSubject<User | null>(null);
-  // TODO uncomment if you need auth feature
-  // public user = new BehaviorSubject<User | null>(this.storage.getItem('user'));
+  public user = new BehaviorSubject<User | null>(this.storage.getItem('user'));
 
   constructor() {
     this.user.subscribe(user => {
