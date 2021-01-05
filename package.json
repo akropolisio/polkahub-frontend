@@ -37,7 +37,7 @@
     "@material-ui/styles": "^4.6.0",
     "@types/markdown-to-jsx": "^6.11.0",
     "@types/react-scroll": "^1.5.4",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bn.js": "^5.0.0",
     "build-route-tree": "^1.0.2",
     "classnames": "^2.2.6",
